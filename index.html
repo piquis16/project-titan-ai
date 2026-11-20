@@ -1,1 +1,201 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<meta name="description" content="TITAN AI global football intelligence">
+<link rel="manifest" href="manifest.json">
+<title>PROJECT TITAN AI</title>
+<style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:#080d18;color:#edf3ff;
+font-family:Arial,sans-serif;padding:18px}
+header{display:flex;justify-content:space-between;align-items:center;
+padding:12px 0 22px}
+h1{font-size:25px;color:#55dfa5;margin:0}
+h2{font-size:17px}
+small,.muted{color:#93a4bd}
+.card{background:#131e30;border:1px solid #26364c;
+border-radius:15px;padding:16px;margin:13px 0}
+.status{color:#55dfa5;font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.metric{background:#1b2940;border-radius:12px;padding:14px}
+.metric strong{font-size:25px;display:block;margin-bottom:5px}
+button{border:0;border-radius:9px;padding:12px;
+background:#55dfa5;color:#07170f;font-weight:bold}
+input{width:100%;padding:12px;margin:7px 0;
+border:1px solid #34445c;background:#080d18;
+color:white;border-radius:8px}
+.full{width:100%;margin-top:8px}
+nav{display:flex;gap:8px;overflow:auto;padding:8px 0}
+nav button{white-space:nowrap;background:#1b2940;color:white}
+nav button.active{background:#55dfa5;color:#07170f}
+.page{display:none}
+.page.active{display:block}
+.fixture{padding:12px 0;border-bottom:1px solid #29384d}
+footer{text-align:center;color:#71829c;font-size:11px;padding:25px}
+</style>
+</head>
+<body>
+<header>
+ <div>
+  <small>GLOBAL FOOTBALL INTELLIGENCE</small>
+  <h1>PROJECT TITAN AI</h1>
+  <div class="muted">Your football intelligence system</div>
+ </div>
+ <div>⚡</div>
+</header>
+
+<div class="card">
+ <div class="status">● TITAN CORE INITIALISED</div>
+ <p class="muted">System foundation is running.</p>
+ <small id="connection">Checking connection...</small>
+</div>
+
+<nav>
+ <button class="active" onclick="showPage('home',this)">Dashboard</button>
+ <button onclick="showPage('fixtures',this)">Fixtures</button>
+ <button onclick="showPage('intelligence',this)">Intelligence</button>
+ <button onclick="showPage('system',this)">System</button>
+</nav>
+
+<section id="home" class="page active">
+ <div class="grid">
+  <div class="metric"><strong id="total">0</strong><small>Saved fixtures</small></div>
+  <div class="metric"><strong>3</strong><small>Daily pick limit</small></div>
+  <div class="metric"><strong>1.50</strong><small>Combined odds target</small></div>
+  <div class="metric"><strong>FREE</strong><small>Data-source policy</small></div>
+ </div>
+ <div class="card">
+  <h2>Global fixture discovery</h2>
+  <p class="muted">The global data collector is awaiting source integration.</p>
+  <button class="full" onclick="showPage('fixtures',document.querySelectorAll('nav button')[1])">Open fixture centre</button>
+ </div>
+ <div class="card">
+  <h2>Today's intelligence</h2>
+  <p class="muted">No verified live predictions yet. TITAN will not invent fixtures or odds.</p>
+ </div>
+</section>
+
+<section id="fixtures" class="page">
+ <div class="card">
+  <h2>Global fixture database</h2>
+  <p class="muted">Fixtures saved on this device.</p>
+  <div id="fixtureList">No fixtures stored.</div>
+ </div>
+ <div class="card">
+  <h2>Add a fixture</h2>
+  <input id="homeTeam" placeholder="Home team">
+  <input id="awayTeam" placeholder="Away team">
+  <input id="competition" placeholder="League / competition">
+  <input id="kickoff" type="datetime-local">
+  <button class="full" onclick="addFixture()">Save fixture</button>
+ </div>
+</section>
+
+<section id="intelligence" class="page">
+ <div class="card">
+  <h2>Intelligence departments</h2>
+  <p>🌍 Global fixture discovery</p>
+  <p>📊 Team and player statistics</p>
+  <p>🧠 Mathematical prediction models</p>
+  <p>⚔️ Tactical analysis</p>
+  <p>🛡️ Risk verification</p>
+  <p>📈 Historical performance learning</p>
+  <p class="muted">Departments will be activated as their data and models are implemented and tested.</p>
+ </div>
+</section>
+
+<section id="system" class="page">
+ <div class="card">
+  <h2>System configuration</h2>
+  <p>Platform: Android PWA</p>
+  <p>Maximum selections: 3</p>
+  <p>Combined odds target: 1.50+</p>
+  <p>Data policy: Free sources</p>
+  <p>Storage: Device local storage</p>
+  <p id="storageStatus" class="status">Local database ready</p>
+ </div>
+</section>
+
+<footer>PROJECT TITAN AI • PRIVATE FOOTBALL INTELLIGENCE</footer>
+
+<script>
+const KEY="titan_fixtures_v1";
+let fixtures=[];
+try{fixtures=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
+
+function save(){
+ try{
+  localStorage.setItem(KEY,JSON.stringify(fixtures));
+  document.getElementById("storageStatus").textContent="Local storage operational";
+ }catch(e){
+  alert("Storage unavailable on this browser.");
+ }
+}
+
+function addFixture(){
+ const home=document.getElementById("homeTeam").value.trim();
+ const away=document.getElementById("awayTeam").value.trim();
+ const league=document.getElementById("competition").value.trim();
+ const date=document.getElementById("kickoff").value;
+ if(!home||!away||!league||!date){
+  alert("Complete all fixture fields.");
+  return;
+ }
+ fixtures.push({home,away,league,date});
+ save();
+ render();
+ ["homeTeam","awayTeam","competition","kickoff"].forEach(id=>{
+  document.getElementById(id).value="";
+ });
+}
+
+function render(){
+ document.getElementById("total").textContent=fixtures.length;
+ const list=document.getElementById("fixtureList");
+ list.replaceChildren();
+ if(!fixtures.length){list.textContent="No fixtures stored.";return}
+ fixtures.forEach(f=>{
+  const item=document.createElement("div");
+  item.className="fixture";
+  const title=document.createElement("b");
+  title.textContent=f.home+" vs "+f.away;
+  const info=document.createElement("div");
+  info.className="muted";
+  info.textContent=f.league+" • "+f.date;
+  item.append(title,info);
+  list.append(item);
+ });
+}
+
+function showPage(id,button){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+ button.classList.add("active");
+}
+
+document.getElementById("connection").textContent=
+ navigator.onLine?"Internet connection available":"Offline mode";
+
+window.addEventListener("online",()=>{
+ document.getElementById("connection").textContent="Internet connection available";
+});
+window.addEventListener("offline",()=>{
+ document.getElementById("connection").textContent="Offline mode";
+});
+
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./sw.js").catch(console.error);
+ });
+}
+render();
+</script>
+</body>
+</html>
+
