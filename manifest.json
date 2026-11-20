@@ -1,0 +1,13 @@
+
+{
+  "name": "PROJECT TITAN AI",
+  "short_name": "TITAN AI",
+  "description": "Global Football Intelligence and Analysis",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080d18",
+  "theme_color": "#080d18",
+  "categories": ["sports", "utilities"]
+}
