@@ -1,0 +1,92 @@
+{
+  "updated_at": "2026-11-20T23:49:18.140043+00:00",
+  "source": "ESPN public scoreboard",
+  "coverage": {
+    "competitions_attempted": 20,
+    "competitions_failed": 20,
+    "fixtures_found": 0
+  },
+  "errors": [
+    {
+      "competition": "England Premier League",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "England Championship",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Spain La Liga",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Spain Segunda",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Germany Bundesliga",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Germany 2 Bundesliga",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Italy Serie A",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Italy Serie B",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "France Ligue 1",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "France Ligue 2",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Netherlands Eredivisie",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Portugal Liga Portugal",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Scotland Premiership",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "USA MLS",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Brazil Serie A",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Argentina Primera",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "Mexico Liga MX",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "UEFA Champions League",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "UEFA Europa League",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "competition": "UEFA Conference League",
+      "error": "HTTP Error 400: Bad Request"
+    }
+  ],
+  "fixtures": []
+}
