@@ -150,13 +150,14 @@ async function titanCollectFixtures() {
       failed.join("; ");
     results.appendChild(warning);
   }
-
-  if (!fixtures.length) {
-    results.textContent =
-      "No fixtures retrieved. Check internet access and source availability.";
-  }
-
-  button.disabled = false;
+if (!fixtures.length) {
+  const msg = document.createElement("p");
+  msg.className = "muted";
+  msg.textContent =
+    "No fixtures retrieved. Details: " +
+    (failed.length
+      ? failed.join(" | ")
+      : "Sources returned no scheduled events.");
+  results.appendChild(msg);
 }
-
-titanBuildCollector();
+  
